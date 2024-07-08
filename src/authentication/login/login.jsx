@@ -9,6 +9,8 @@ import { customPost } from "../../api/api";
 import { setUser } from "../../features/auth/authSlice";
 import Swal from "sweetalert2";
 import LoginVectorImg from "../../assets/images/login.jpg";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
@@ -29,20 +31,14 @@ const LoginPage = () => {
       try {
         const user = await customPost("/users/login", values);
         dispatch(setUser(user?.data));
-        Swal.fire({
-          icon: "success",
-          title: "Login successful",
-          text: "You are now logged in.",
-        });
+
         console.log("LOGIN RESPONSE===>", user);
         setSubmitting(false);
         navigate("/");
       } catch (error) {
-        Swal.fire({
-          icon: "error",
-          title: "Login failed",
-          text: error.message || "An error occurred during login.",
-        });
+        // toast.error(error.message, {
+        //   position: "top-right",
+        // });
         setSubmitting(false);
       }
     },

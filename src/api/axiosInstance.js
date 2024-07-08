@@ -72,7 +72,6 @@ const refreshAccessToken = async () => {
       title: "Session expired",
       text: "Please log in again.",
     });
-    // Optionally redirect to login page
     window.location.href = "/login";
   }
 };
